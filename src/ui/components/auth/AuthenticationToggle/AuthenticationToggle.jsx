@@ -1,11 +1,9 @@
-import React from 'react';
-import {Button} from "@mui/material";
-import useAuth from "../../../../hooks/useAuth.js";
 import {useNavigate} from "react-router";
+import useAuth from "../../../../hooks/useAuth.js";
+import {Button} from "@mui/material";
 
 const AuthenticationToggle = () => {
-    const {logout, isLoggedIn} = useAuth();
-
+    const { logout, isLoggedIn } = useAuth();
     const navigate = useNavigate();
 
     const handleLogin = () => {
@@ -27,5 +25,6 @@ const AuthenticationToggle = () => {
         </Button>
     );
 };
+
 
 export default AuthenticationToggle;

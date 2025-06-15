@@ -8,24 +8,7 @@ const AuthProvider = ({ children }) => {
         loading: true
     });
 
-    const login = (userData) => {
-        setState({
-            user: userData,
-            loading: false,
-        });
-    };
-
-    const logout = () => {
-        axios.get("http://localhost:8080/api/user/logout", { withCredentials: true })
-            .finally(() => {
-                setState({
-                    user: null,
-                    loading: false,
-                });
-            });
-    };
-
-    useEffect(() => {
+    const fetchUser = () => {
         axios.get("http://localhost:8080/api/user/me", { withCredentials: true })
             .then((res) => {
                 setState({
@@ -39,7 +22,28 @@ const AuthProvider = ({ children }) => {
                     loading: false,
                 });
             });
-    }, []);
+    };
+
+    const login = (userData) => {
+        setState({
+            user: userData,
+            loading: false,
+        });
+        fetchUser();
+    };
+
+    const logout = () => {
+        axios.get("http://localhost:8080/api/user/logout", { withCredentials: true })
+            .finally(() => {
+                setState({
+                    user: null,
+                    loading: false,
+                });
+                fetchUser();
+            });
+    };
+
+    useEffect(fetchUser, []);
 
     return (
         <AuthContext.Provider value={{ login, logout, ...state, isLoggedIn: !!state.user }}>
@@ -47,5 +51,6 @@ const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
+
 
 export default AuthProvider;
