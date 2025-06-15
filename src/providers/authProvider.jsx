@@ -1,68 +1,48 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import AuthContext from "../contexts/authContext.js";
+import axios from "axios";
 
-const decode = (jwtToken) => {
-    try {
-        return JSON.parse(atob(jwtToken.split(".")[1]));
-    } catch (error) {
-        console.log(error);
-        return null;
-    }
-};
-
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
     const [state, setState] = useState({
-        "user": null,
-        "loading": true
+        user: null,
+        loading: true
     });
 
-    const login = (jwtToken) => {
-        const payload = decode(jwtToken);
-        if (payload) {
-            localStorage.setItem("token", jwtToken);
-            setState({
-                "user": payload,
-                "loading": false,
-            });
-        }
+    const login = (userData) => {
+        setState({
+            user: userData,
+            loading: false,
+        });
     };
 
     const logout = () => {
-        const jwtToken = localStorage.getItem("token");
-        if (jwtToken) {
-            localStorage.removeItem("token");
-            setState({
-                "user": null,
-                "loading": false,
+        axios.get("http://localhost:8080/api/user/logout", { withCredentials: true })
+            .finally(() => {
+                setState({
+                    user: null,
+                    loading: false,
+                });
             });
-        }
     };
 
     useEffect(() => {
-        const jwtToken = localStorage.getItem("token");
-        if (jwtToken) {
-            const payload = decode(jwtToken);
-            if (payload) {
+        axios.get("http://localhost:8080/api/user/me", { withCredentials: true })
+            .then((res) => {
                 setState({
-                    "user": payload,
-                    "loading": false,
+                    user: res.data,
+                    loading: false,
                 });
-            } else {
+            })
+            .catch(() => {
                 setState({
-                    "user": null,
-                    "loading": false,
+                    user: null,
+                    loading: false,
                 });
-            }
-        } else {
-            setState({
-                "user": null,
-                "loading": false,
             });
-        }
     }, []);
 
     return (
-        <AuthContext.Provider value={{login, logout, ...state, isLoggedIn: !!state.user}}>
+        <AuthContext.Provider value={{ login, logout, ...state, isLoggedIn: !!state.user }}>
             {children}
         </AuthContext.Provider>
     );
