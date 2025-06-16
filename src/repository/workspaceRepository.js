@@ -10,8 +10,17 @@ const workspaceRepository = {
     accessWorkspace: async (id) => {
         return await axiosInstance.get(`/workspace/${id}`, { withCredentials: true });
     },
-    editWorkspace: async (id) => {
-        return await axiosInstance.get(`/workspace/edit/${id}`, { withCredentials: true });
+    editWorkspace: async (id, data) => {
+        return await axiosInstance.post(
+            `/workspace/edit/${id}`,
+            data,
+            {
+                withCredentials: true,
+                headers: {
+                    "X-Workspace-Id": id
+                }
+            }
+        );
     },
     add: async (data) => {
         return await axiosInstance.post("/workspace/add", data, { withCredentials: true });

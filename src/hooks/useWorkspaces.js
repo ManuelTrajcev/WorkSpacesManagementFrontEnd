@@ -54,15 +54,17 @@ const useWorkspaces = () => {
         }
     }, []);
 
-    const onEdit = useCallback(async (id) => {
+    const onEdit = useCallback(async (id, data) => {
+        console.log(data)
         try {
-            const response = await workspaceRepository.editWorkspace(id);
+            const response = await workspaceRepository.editWorkspace(id, data);
+            fetchMyWorkspaces();
             return response.data;
         } catch (error) {
             console.error(`Error editing workspace with ID ${id}:`, error);
             throw error;
         }
-    }, []);
+    }, [fetchMyWorkspaces]);
 
     useEffect(() => {
         fetchAllWorkspaces();
