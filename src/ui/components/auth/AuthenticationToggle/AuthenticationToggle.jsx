@@ -3,7 +3,7 @@ import useAuth from "../../../../hooks/useAuth.js";
 import {Button} from "@mui/material";
 
 const AuthenticationToggle = () => {
-    const { logout, isLoggedIn } = useAuth();
+    const {logout, isLoggedIn} = useAuth();
     const navigate = useNavigate();
 
     const handleLogin = () => {
@@ -20,6 +20,7 @@ const AuthenticationToggle = () => {
             color="inherit"
             variant={!isLoggedIn ? "text" : "outlined"}
             onClick={!isLoggedIn ? handleLogin : handleLogout}
+            sx={{borderRadius: 0, border: 2}}
         >
             {!isLoggedIn ? "Login" : "Logout"}
         </Button>

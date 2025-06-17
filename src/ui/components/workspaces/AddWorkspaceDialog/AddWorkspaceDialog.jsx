@@ -20,7 +20,7 @@ const initialFormData = {
     "manufacturerId": "",
 };
 
-const AddProductDialog = ({open, onClose, onAdd}) => {
+const AddWorkspaceDialog = ({open, onClose, onAdd}) => {
     const [formData, setFormData] = useState(initialFormData);
     const categories = useCategories();
     const manufacturers = useManufacturers();

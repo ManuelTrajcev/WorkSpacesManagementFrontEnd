@@ -13,8 +13,8 @@ const pages = [
 const Header = () => {
     return (
         <Box>
-            <AppBar position="static">
-                <Toolbar>
+            <AppBar position="static" color="error">
+                <Toolbar  sx={{ color: 'black' }}>
                     {/*<IconButton*/}
                     {/*    size="large"*/}
                     {/*    edge="start"*/}
@@ -31,7 +31,7 @@ const Header = () => {
                         {pages.map((page) => (
                             <Link key={page.name} to={page.path}>
                                 <Button
-                                    sx={{my: 2, color: "white", display: "block", textDecoration: "none"}}
+                                    sx={{my: 2, color: "black", display: "block", textDecoration: "none"}}
                                 >
                                     {page.name}
                                 </Button>
