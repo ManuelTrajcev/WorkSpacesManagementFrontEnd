@@ -22,6 +22,7 @@ const AuthenticationToggle = () => {
             color="inherit"
             variant={!isLoggedIn ? "text" : "outlined"}
             onClick={!isLoggedIn ? handleLogin : handleLogout}
+            sx={{borderRadius: 0, border: 2}}
         >
             {!isLoggedIn ? "Login" : "Logout"}
         </Button>
