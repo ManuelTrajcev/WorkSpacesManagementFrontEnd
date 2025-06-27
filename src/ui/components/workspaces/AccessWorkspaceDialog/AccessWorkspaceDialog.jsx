@@ -11,51 +11,35 @@ import {
 } from "@mui/material";
 
 
-const EditProductDialog = ({open, onClose, workspace, onEdit}) => {
-    const [formData, setFormData] = useState({
-        "name": workspace.name,
-        "description": workspace.description,
-    });
-
-    const handleChange = (event) => {
-        const {name, value} = event.target;
-        setFormData({...formData, [name]: value});
-    };
-
-    const handleSubmit = () => {
-        onEdit(workspace.id, formData);
-        setFormData(formData);
-        onClose();
-    };
+const AccessWorkspaceDialog = ({open, onClose, workspace}) => {
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle>Add Product</DialogTitle>
+            <DialogTitle>Workspace Info</DialogTitle>
             <DialogContent>
                 <TextField
                     margin="dense"
                     label="Name"
                     name="name"
-                    value={formData.name}
-                    onChange={handleChange}
+                    value={workspace.name}
+                    // disabled={true}
                     fullWidth
                 />
                 <TextField
                     margin="dense"
                     label="Description"
                     name="description"
-                    value={formData.description}
-                    onChange={handleChange}
+                    value={workspace.description}
+                    //disabled={true}
                     fullWidth
                 />
 
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose}>Cancel</Button>
-                <Button onClick={handleSubmit} variant="contained" color="warning">Edit</Button>
             </DialogActions>
         </Dialog>
     );
 };
 
-export default EditProductDialog;
+export default AccessWorkspaceDialog;

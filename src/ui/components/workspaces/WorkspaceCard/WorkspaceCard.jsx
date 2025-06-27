@@ -3,28 +3,31 @@ import InfoIcon from '@mui/icons-material/Info';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {Box, Button, Card, CardActions, CardContent, Typography} from "@mui/material";
-import EditProductDialog from "../EditWorkspaceDialog/EditProductDialog.jsx";
+import EditProductDialog from "../EditWorkspaceDialog/EditWorkspaceDialog.jsx";
 import DeleteProductDialog from "../DeleteWorkspaceDialog/DeleteProductDialog.jsx";
 import {useNavigate} from "react-router";
+import AccessWorkspaceDialog from "../AccessWorkspaceDialog/AccessWorkspaceDialog.jsx";
 
 const WorkspaceCard = ({workspace, onEdit, onAccess}) => {
     const navigate = useNavigate();
     const [editProductDialogOpen, setEditProductDialogOpen] = useState(false);
     const [deleteProductDialogOpen, setDeleteProductDialogOpen] = useState(false);
+    const [accessWorkspaceDialogOpen, setAccessWorkspaceDialogOpen] = useState(false);
+
 
     return (
         <>
-            <Card sx={{boxShadow: 3, borderRadius: 2, p: 1}}>
+            <Card sx={{ boxShadow: 3, borderRadius: 0, p: 1, width: '100%',  }}  >
                 <CardContent>
                     <Typography variant="h5">{workspace.name}</Typography>
                     <Typography variant="body2" sx={{textAlign: "right"}}>{workspace.description} </Typography>
                 </CardContent>
-                <CardActions sx={{justifyContent: "space-between"}}>
+                <CardActions sx={{justifyContent: "end"}}>
                     <Button
                         size="small"
-                        color="info"
+                        color="primary"
                         startIcon={<InfoIcon/>}
-                        onClick={() => navigate(`/workspace/${workspace.id}`)}
+                        onClick={() => setAccessWorkspaceDialogOpen(true)}
                     >
                         View
                     </Button>
@@ -48,6 +51,11 @@ const WorkspaceCard = ({workspace, onEdit, onAccess}) => {
                 onClose={() => setEditProductDialogOpen(false)}
                 workspace={workspace}
                 onEdit={onEdit}
+            />
+            <AccessWorkspaceDialog
+                                      open={accessWorkspaceDialogOpen}
+                                      onClose={() => setAccessWorkspaceDialogOpen(false)}
+                                      workspace={workspace}
             />
             {/*/>*/}
             {/*<DeleteProductDialog*/}
