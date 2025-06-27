@@ -14,7 +14,7 @@ import {
 const EditProductDialog = ({open, onClose, workspace, onEdit}) => {
     const [formData, setFormData] = useState({
         "name": workspace.name,
-        "price": workspace.description,
+        "description": workspace.description,
     });
 
     const handleChange = (event) => {
@@ -42,9 +42,8 @@ const EditProductDialog = ({open, onClose, workspace, onEdit}) => {
                 />
                 <TextField
                     margin="dense"
-                    label="Price"
-                    name="price"
-                    type="number"
+                    label="Description"
+                    name="description"
                     value={formData.description}
                     onChange={handleChange}
                     fullWidth

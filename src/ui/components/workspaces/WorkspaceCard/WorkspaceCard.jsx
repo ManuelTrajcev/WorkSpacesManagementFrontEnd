@@ -43,11 +43,12 @@ const WorkspaceCard = ({workspace, onEdit, onAccess}) => {
                     </Box>
                 </CardActions>
             </Card>
-            {/*<EditProductDialog*/}
-            {/*    open={editProductDialogOpen}*/}
-            {/*    onClose={() => setEditProductDialogOpen(false)}*/}
-            {/*    product={product}*/}
-            {/*    onEdit={onEdit}*/}
+            <EditProductDialog
+                open={editProductDialogOpen}
+                onClose={() => setEditProductDialogOpen(false)}
+                workspace={workspace}
+                onEdit={onEdit}
+            />
             {/*/>*/}
             {/*<DeleteProductDialog*/}
             {/*    open={deleteProductDialogOpen}*/}
