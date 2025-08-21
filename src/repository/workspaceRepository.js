@@ -10,8 +10,11 @@ const workspaceRepository = {
     accessWorkspace: async (id) => {
         return await axiosInstance.get(`/workspace/${id}`);
     },
-    editWorkspace: async (id) => {
-        return await axiosInstance.get(`/workspace/edit/${id}`);
+    editWorkspace: async (id, data) => {
+        return await axiosInstance.post(
+            `/workspace/edit/${id}`,
+            data
+        );
     },
     add: async (data) => {
         return await axiosInstance.post("/workspace/add", data);

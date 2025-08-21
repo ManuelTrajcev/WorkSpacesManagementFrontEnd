@@ -11,10 +11,10 @@ import {
 } from "@mui/material";
 
 
-const EditProductDialog = ({open, onClose, workspace, onEdit}) => {
+const EditWorkspaceDialog = ({open, onClose, workspace, onEdit}) => {
     const [formData, setFormData] = useState({
         "name": workspace.name,
-        "price": workspace.description,
+        "description": workspace.description,
     });
 
     const handleChange = (event) => {
@@ -30,7 +30,7 @@ const EditProductDialog = ({open, onClose, workspace, onEdit}) => {
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle>Add Product</DialogTitle>
+            <DialogTitle>Edit Workspace</DialogTitle>
             <DialogContent>
                 <TextField
                     margin="dense"
@@ -42,9 +42,8 @@ const EditProductDialog = ({open, onClose, workspace, onEdit}) => {
                 />
                 <TextField
                     margin="dense"
-                    label="Price"
-                    name="price"
-                    type="number"
+                    label="Description"
+                    name="description"
                     value={formData.description}
                     onChange={handleChange}
                     fullWidth
@@ -59,4 +58,4 @@ const EditProductDialog = ({open, onClose, workspace, onEdit}) => {
     );
 };
 
-export default EditProductDialog;
+export default EditWorkspaceDialog;
